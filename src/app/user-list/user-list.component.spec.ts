@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableModule } from '@angular/material/table';
 
 import { UserListComponent } from './user-list.component';
 
@@ -9,6 +10,7 @@ describe('UserListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserListComponent],
+      imports: [MatTableModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserListComponent);
@@ -21,6 +23,25 @@ describe('UserListComponent', () => {
   });
 
   it('should render user-list table', () => {
+    const tableElement = document.querySelector('table#usrTbl');
+
+    const tableHeaders = Array.from(
+      tableElement!.getElementsByClassName('mat-header-cell')
+    );
+
+    const headerClasses = [
+      'mat-column-userName',
+      'mat-column-fullName',
+      'mat-column-email',
+      'mat-column-company',
+      'mat-column-address'
+    ];
+
+    tableHeaders.forEach(header => {
+      expect(
+        headerClasses.some(item => header.classList.contains(item))
+      ).toBeTruthy();
+    })
     // TODO: write unit test that expect user-list table show in app
   });
 

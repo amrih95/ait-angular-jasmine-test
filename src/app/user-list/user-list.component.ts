@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 import { Users } from '../interface/users';
 import { MainService } from '../services/main.service';
-
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -11,16 +8,11 @@ import { MainService } from '../services/main.service';
 })
 export class UserListComponent implements OnInit {
   
-  listUsers: Array<Users> = [];
-  data = new BehaviorSubject<any[]>([]);
- 
+  @Input() listUsers: Array<Users> = [];
 
-  constructor(public modalService: NgbModal, public _MainService: MainService) { }
+  constructor(public _MainService: MainService) { }
 
-  ngOnInit(): void {
-    this._MainService.getData.subscribe(response=>{
-      this.listUsers = response;
-    });
-  }
-
+  ngOnInit(): void { /* TODO document why this method 'ngOnInit' is empty */ }
+  
+  displayedColumns: string[] = ['userName', 'fullName', 'email', 'company', 'address'];
 }

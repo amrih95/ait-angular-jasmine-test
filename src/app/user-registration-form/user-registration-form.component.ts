@@ -17,8 +17,8 @@ export class UserRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      userName: ['', [Validators.required]],
-      fullName: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required]],
       company: ['', [Validators.required]],
       address: ['', [Validators.required]]
@@ -31,14 +31,21 @@ export class UserRegistrationFormComponent implements OnInit {
       return
     } else {
       let _data = {
-        userName: this.form.get('userName')?.value,
-        fullName: this.form.get('fullName')?.value,
+        username: this.form.get('username')?.value,
+        name: this.form.get('name')?.value,
         email: this.form.get('email')?.value,
-        company: this.form.get('company')?.value,
-        address: this.form.get('address')?.value
+        company: {
+          name: this.form.get('company')?.value
+        },
+        address: {
+          city: this.form.get('address')?.value
+        }
       }
-      this._MainService.setData(_data);
-      this.activeModal.close();
+
+      let stored = JSON.parse(localStorage.getItem("users") || '{}');
+      stored.push(_data);
+      let newStored = localStorage.setItem("users", JSON.stringify(stored));
+      this.activeModal.close(newStored);
     }
   }    
 

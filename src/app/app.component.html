@@ -1,8 +1,8 @@
 <div class="container">
   <div class="register">
-    <button class="btn btn-primary submit" (click)="showNewUserForm()">Register new user</button>
+    <button class="btn btn-primary submit" (click)="showNewUserForm()" id="btnRegister">Register new user</button>
   </div>
   <div class="content">
-    <app-user-list></app-user-list>
+    <app-user-list [listUsers]="listUsers"></app-user-list>
   </div>
 </div>

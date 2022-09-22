@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [AppComponent],
+      declarations: [AppComponent,UserListComponent],
     }).compileComponents();
   });
 
@@ -17,10 +19,14 @@ describe('AppComponent', () => {
   });
 
   it('should render register button', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const btnRegistElement = fixture.debugElement.query(By.css('#btnRegister'))
+    expect(btnRegistElement).toBeTruthy();
     // TODO: write unit test that expect register button has show in app
   });
 
   it('should show user registration form dialog when register button clicked', () => {
+    
     // TODO: write unit test that expect user registration form rendered at dialog when register button clicked
   });
 

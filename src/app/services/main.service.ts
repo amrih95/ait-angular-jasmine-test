@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Users } from '../interface/users';
+import { tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
 
-  data = new BehaviorSubject<Users[]>([]);
-  getData = this.data.asObservable();
+  constructor(
+    private http: HttpClient
+  ) { /* TODO document why this constructor is empty */ }
 
-  constructor() { /* TODO document why this constructor is empty */ }
-
-  setData(datas: Users) {
-    this.data.next(this.data.getValue().concat([datas]));
+  getAllData() {
+    return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
+      tap(
+        {
+          next: (data) => data,
+          error: (error) => console.log(error)
+        }
+      )
+    )
   }
+
 }
