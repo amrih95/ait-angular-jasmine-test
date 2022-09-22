@@ -1,1 +1,22 @@
-<p>user-list works!</p>
+<div class="container">            
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: #d8d8d8">
+          <th>User Name</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Company</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let listUser of listUsers">
+          <td>{{listUser.userName}}</td>
+          <td>{{listUser.fullName}}</td>
+          <td>{{listUser.email}}</td>
+          <td>{{listUser.company}}</td>
+          <td>{{listUser.address}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
