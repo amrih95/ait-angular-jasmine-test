@@ -1,23 +1,26 @@
 <div class="container">
     <table mat-table [dataSource]="listUsers" class="mat-elevation-z8" id="usrTbl">
+      <caption>
+        Users List
+      </caption>
       <ng-container matColumnDef="userName">
-        <th mat-header-cell *matHeaderCellDef> User Name </th>
+        <th mat-header-cell *matHeaderCellDef id="userName"> User Name </th>
         <td mat-cell *matCellDef="let element"> {{element.username}} </td>
       </ng-container>
       <ng-container matColumnDef="fullName">
-        <th mat-header-cell *matHeaderCellDef> Full Name </th>
+        <th mat-header-cell *matHeaderCellDef id="fullName"> Full Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <th mat-header-cell *matHeaderCellDef id="email"> Email </th>
         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
       </ng-container>
       <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef> Company </th>
+        <th mat-header-cell *matHeaderCellDef id="company"> Company </th>
         <td mat-cell *matCellDef="let element"> {{element.company['name']}} </td>
       </ng-container>
       <ng-container matColumnDef="address">
-        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <th mat-header-cell *matHeaderCellDef id="address"> Address </th>
         <td mat-cell *matCellDef="let element"> {{element.address['city']}} </td>
       </ng-container>
     

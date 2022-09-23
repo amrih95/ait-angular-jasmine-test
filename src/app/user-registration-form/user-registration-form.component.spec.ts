@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +12,7 @@ describe('UserRegistrationFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserRegistrationFormComponent],
-      imports: [FormsModule, ReactiveFormsModule],
+      imports: [FormsModule, ReactiveFormsModule, HttpClientTestingModule],
       providers: [NgbActiveModal, FormBuilder]
     }).compileComponents();
 

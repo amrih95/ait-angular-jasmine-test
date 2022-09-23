@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule } from '@angular/material/table';
 
@@ -10,7 +11,7 @@ describe('UserListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserListComponent],
-      imports: [MatTableModule]
+      imports: [MatTableModule, HttpClientTestingModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserListComponent);
@@ -46,6 +47,7 @@ describe('UserListComponent', () => {
   });
 
   it('should re-render user-list table every time user data append', () => {
+    
     // TODO: write unit test that expect the count of user-list shown in table equal with data from localStorage
   });
 });
