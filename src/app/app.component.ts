@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
 import { Users } from './interface/users';
 import { MainService } from './services/main.service';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   listUsers: Array<Users> = [];
   
-  constructor(public modalService: NgbModal, public mainService: MainService) { }
+  constructor(public mainService: MainService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getData();
@@ -28,11 +28,11 @@ export class AppComponent implements OnInit {
   }
 
   showNewUserForm() {
-    const modalRef = this.modalService.open(UserRegistrationFormComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.result.then((resp) => {
-      this.listUsers = resp;
-    }).catch((error) => {
-      console.log(error);
+    let dialogRef = this.dialog.open(UserRegistrationFormComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.listUsers = result;
     });
   }
+
 }

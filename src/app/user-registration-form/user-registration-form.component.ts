@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Users } from '../interface/users';
 import { MainService } from '../services/main.service';
 
 @Component({
@@ -16,7 +18,7 @@ export class UserRegistrationFormComponent implements OnInit {
   company = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
   
-  constructor(public activeModal: NgbActiveModal, public formBuilder: FormBuilder, public _MainService: MainService) { }
+  constructor(public formBuilder: FormBuilder, public _MainService: MainService, public dialogRef: MatDialogRef<UserRegistrationFormComponent>) { }
 
   ngOnInit(): void { /* TODO document why this method 'ngOnInit' is empty */ }
 
@@ -35,11 +37,11 @@ export class UserRegistrationFormComponent implements OnInit {
     let stored = JSON.parse(localStorage.getItem("users") || '{}');
     stored.push(_data);
     localStorage.setItem("users", JSON.stringify(stored));
-    this.activeModal.close(JSON.parse(localStorage.getItem("users") || '{}'));
+    this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
   } 
 
   public cancel(): void {
-    this.activeModal.close(JSON.parse(localStorage.getItem("users") || '{}'));
+    this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
   }
 
 }
