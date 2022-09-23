@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   showNewUserForm() {
-    let dialogRef = this.dialog.open(UserRegistrationFormComponent);
+    let dialogRef = this.dialog.open(UserRegistrationFormComponent, { disableClose: true });
 
     dialogRef.afterClosed().subscribe(result => {
       this.listUsers = result;
