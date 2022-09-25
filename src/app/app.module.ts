@@ -13,7 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,17 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     MatTableModule,
     MatInputModule,
+    MatDialogModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_DIALOG_DEFAULT_OPTIONS,
+    useValue: {}
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

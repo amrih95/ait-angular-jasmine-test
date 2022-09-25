@@ -1,23 +1,47 @@
-import { inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { UserListComponent } from './user-list/user-list.component';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MainService } from './services/main.service';
 import { HttpClient } from '@angular/common/http';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule],
-      declarations: [AppComponent,UserListComponent,UserRegistrationFormComponent],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        MatTableModule
+      ],
+      declarations: [
+        AppComponent,
+        UserRegistrationFormComponent
+      ],
       providers: [
-        {provide: MainService, useValue: 'https://jsonplaceholder.typicode.com/users'}, NgbActiveModal, FormBuilder
+        { provide: MainService, useValue: 'https://jsonplaceholder.typicode.com/users' },
+        FormBuilder,
+        {
+          provide: MAT_DIALOG_DEFAULT_OPTIONS,
+          useValue: {}
+        },
+        { provide: MatDialog },
+        { provide: MatDialogRef, useValue: {} }
       ]
     }).compileComponents().then(() => {
+      // App Component
+      fixture = TestBed.createComponent(AppComponent);
+      component = fixture.componentInstance;
     });
 
   });
@@ -29,18 +53,20 @@ describe('AppComponent', () => {
   });
 
   it('should render register button', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    let instance: HTMLElement = fixture.nativeElement;
-    let app: AppComponent;
-    app = fixture.debugElement.componentInstance;
-    instance = fixture.debugElement.nativeElement;
+    const instance = fixture.nativeElement as HTMLElement;
     let button = instance.querySelector('#btnRegister');
-    expect(button?.textContent).toContain('Register new user', 'button renders');
+
+    expect(button?.textContent).toEqual(' Register New User ');
     // TODO: write unit test that expect register button has show in app
   });
 
   it('should show user registration form dialog when register button clicked', () => {
-    
+    fixture.debugElement.query(By.css('#btnRegister'))
+    .triggerEventHandler('click', {});
+
+    fixture.whenStable().then(() => {
+      expect(!component.dialog.afterOpened.closed).toEqual(true);
+    });
     // TODO: write unit test that expect user registration form rendered at dialog when register button clicked
   });
 
@@ -68,8 +94,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(UserRegistrationFormComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-
-    
 
     // TODO: write unit test that expect user-registration-form dialog closed when button clicked
   }));

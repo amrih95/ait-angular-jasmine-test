@@ -1,9 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Users } from '../interface/users';
-import { MainService } from '../services/main.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-user-registration-form',
@@ -12,35 +9,47 @@ import { MainService } from '../services/main.service';
 })
 export class UserRegistrationFormComponent implements OnInit {
 
-  userName = new FormControl('', [Validators.required]);
-  fullName = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  company = new FormControl('', [Validators.required]);
-  address = new FormControl('', [Validators.required]);
+  form!: FormGroup;
   
-  constructor(public formBuilder: FormBuilder, public _MainService: MainService, public dialogRef: MatDialogRef<UserRegistrationFormComponent>) { }
+  constructor(public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
+    private formBuilder: FormBuilder,) { }
 
-  ngOnInit(): void { /* TODO document why this method 'ngOnInit' is empty */ }
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      userName: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      company: ['', [Validators.required]],
+      address: ['', [Validators.required]]
+    })
+  }
 
-  submit(){
-    let _data = {
-      username: this.userName.getRawValue(),
-      name: this.fullName.getRawValue(),
-      email: this.email.getRawValue(),
-      company: {
-        name: this.company.getRawValue()
-      },
-      address: {
-        city: this.address.getRawValue()
-      }
+  submit(): void {
+    // this.isSubmitted = true;
+
+    if (!this.form.valid) {
+      const data = {
+        username: this.form.get('userName')?.value,
+        name: this.form.get('fullName')?.value,
+        email: this.form.get('email')?.value,
+        company: {
+          name: this.form.get('company')?.value
+        },
+        address: {
+          city: this.form.get('address')?.value
+        }
+      };
+
+      const stored = JSON.parse(localStorage.getItem("users") || '{}');
+      stored.push(data);
+
+      localStorage.setItem("users", JSON.stringify(stored));
+      this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
     }
-    let stored = JSON.parse(localStorage.getItem("users") || '{}');
-    stored.push(_data);
-    localStorage.setItem("users", JSON.stringify(stored));
-    this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
-  } 
 
-  public cancel(): void {
+  }
+
+  cancel() {
     this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
   }
 

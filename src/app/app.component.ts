@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Users } from './interface/users';
 import { MainService } from './services/main.service';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
@@ -12,6 +13,7 @@ import { UserRegistrationFormComponent } from './user-registration-form/user-reg
 export class AppComponent implements OnInit {
 
   listUsers: Array<Users> = [];
+  isLoading: boolean = false;
   
   constructor(public mainService: MainService, public dialog: MatDialog) { }
 
@@ -20,19 +22,22 @@ export class AppComponent implements OnInit {
   }
   title = 'ait-angular-jasmine-test';
 
-  getData(){
+  getData() {
+    this.isLoading = true;
     this.mainService.getAllData().subscribe((resp: any) => {
       this.listUsers = resp;
       localStorage.setItem("users", JSON.stringify(this.listUsers));
+      this.isLoading = false;
     });
   }
 
   showNewUserForm() {
-    let dialogRef = this.dialog.open(UserRegistrationFormComponent, { disableClose: true });
+    const dialogRef =  this.dialog.open(UserRegistrationFormComponent, {
+      width: '500px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       this.listUsers = result;
     });
   }
-
 }

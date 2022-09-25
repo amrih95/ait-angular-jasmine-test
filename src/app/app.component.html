@@ -1,8 +1,11 @@
-<div class="container">
-  <div class="register">
-    <button class="submit" mat-raised-button (click)="showNewUserForm()" id="btnRegister">Register new user</button>
+<div class="users">
+  <div class="action-register">
+    <button mat-flat-button color="primary" (click)="showNewUserForm()" id="btnRegister">
+      Register New User
+    </button>
   </div>
-  <div class="content">
-    <app-user-list [listUsers]="listUsers"></app-user-list>
+  <div class="action-content-registered">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <app-user-list [listUsers]="listUsers" *ngIf="!isLoading"></app-user-list>
   </div>
 </div>

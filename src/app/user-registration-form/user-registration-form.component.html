@@ -1,49 +1,49 @@
-  <form class="users-form">
+  <form [formGroup]="form" class="users-form">
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>User Name</mat-label>
-      <input type="text" matInput [formControl]="userName" placeholder="Yogi">
-      <mat-error *ngIf="userName.hasError('required')">
+      <input type="text" matInput formControlName="userName" placeholder="Yogi">
+      <!-- <mat-error *ngIf="userName.hasError('required')">
         User Name is <strong>required</strong>
-      </mat-error>
+      </mat-error> -->
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Full Name</mat-label>
-      <input type="text" matInput [formControl]="fullName" placeholder="Amrih Yogi">
-      <mat-error *ngIf="fullName.hasError('required')">
+      <input type="text" matInput formControlName="fullName" placeholder="Amrih Yogi">
+      <!-- <mat-error *ngIf="fullName.hasError('required')">
         Full Name is <strong>required</strong>
-      </mat-error>
+      </mat-error> -->
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="email" placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+      <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+      <!-- <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
         Please enter a valid email address
       </mat-error>
       <mat-error *ngIf="email.hasError('required')">
         Email is <strong>required</strong>
-      </mat-error>
+      </mat-error> -->
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Company</mat-label>
-      <input type="text" matInput [formControl]="company" placeholder="PT. Akar Inti Tech">
-      <mat-error *ngIf="company.hasError('required')">
+      <input type="text" matInput formControlName="company" placeholder="PT. Akar Inti Tech">
+      <!-- <mat-error *ngIf="company.hasError('required')">
         Company is <strong>required</strong>
-      </mat-error>
+      </mat-error> -->
     </mat-form-field>
 
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Address</mat-label>
-      <input type="text" matInput [formControl]="address" placeholder="Kuningan, Jakarta">
-      <mat-error *ngIf="address.hasError('required')">
+      <input type="text" matInput formControlName="address" placeholder="Kuningan, Jakarta">
+      <!-- <mat-error *ngIf="address.hasError('required')">
         Address is <strong>required</strong>
-      </mat-error>
+      </mat-error> -->
     </mat-form-field>
-
-    <mat-dialog-actions align="start">
-      <button class="submit" mat-raised-button color="primary" [mat-dialog-close]="true" (click)="submit()">Add</button>
-      <button mat-raised-button color="accent" mat-dialog-close (click)="cancel()">Cancel</button>
-    </mat-dialog-actions>
   </form>
+
+  <div class="button-action" mat-dialog-actions>
+    <button mat-flat-button color="primary" id="add-user" type="submit" (click)="submit()">Add</button>
+    <button mat-flat-button color="warn" id="cancel" (click)="cancel()">Cancel</button>
+  </div>
