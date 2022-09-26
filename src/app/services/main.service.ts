@@ -6,13 +6,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MainService {
-
+  url = 'https://jsonplaceholder.typicode.com/users';
   constructor(
     private http: HttpClient
   ) { /* TODO document why this constructor is empty */ }
 
   getAllData() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
+    return this.http.get(this.url).pipe(
       tap(
         {
           next: (data) => data,

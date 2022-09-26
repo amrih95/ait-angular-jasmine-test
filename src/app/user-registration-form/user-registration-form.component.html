@@ -1,49 +1,36 @@
-  <form [formGroup]="form" class="users-form">
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>User Name</mat-label>
-      <input type="text" matInput formControlName="userName" placeholder="Yogi">
-      <!-- <mat-error *ngIf="userName.hasError('required')">
-        User Name is <strong>required</strong>
-      </mat-error> -->
-    </mat-form-field>
+<div id="form-user-registration-form">
+  <h1 mat-dialog-title>Form User Registration</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="form" class="users-form" id="usersForm">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>User Name</mat-label>
+        <input type="text" matInput formControlName="userName" placeholder="Yogi">
+      </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Full Name</mat-label>
-      <input type="text" matInput formControlName="fullName" placeholder="Amrih Yogi">
-      <!-- <mat-error *ngIf="fullName.hasError('required')">
-        Full Name is <strong>required</strong>
-      </mat-error> -->
-    </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Full Name</mat-label>
+        <input type="text" matInput formControlName="fullName" placeholder="Amrih Yogi">
+      </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
-      <!-- <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="email.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error> -->
-    </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+      </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Company</mat-label>
-      <input type="text" matInput formControlName="company" placeholder="PT. Akar Inti Tech">
-      <!-- <mat-error *ngIf="company.hasError('required')">
-        Company is <strong>required</strong>
-      </mat-error> -->
-    </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Company</mat-label>
+        <input type="text" matInput formControlName="company" placeholder="PT. Akar Inti Tech">
+      </mat-form-field>
 
-    <mat-form-field class="full-width" appearance="fill">
-      <mat-label>Address</mat-label>
-      <input type="text" matInput formControlName="address" placeholder="Kuningan, Jakarta">
-      <!-- <mat-error *ngIf="address.hasError('required')">
-        Address is <strong>required</strong>
-      </mat-error> -->
-    </mat-form-field>
-  </form>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Address</mat-label>
+        <input type="text" matInput formControlName="address" placeholder="Kuningan, Jakarta">
+      </mat-form-field>
+    </form>
+  </div>
 
   <div class="button-action" mat-dialog-actions>
-    <button mat-flat-button color="primary" id="add-user" type="submit" (click)="submit()">Add</button>
-    <button mat-flat-button color="warn" id="cancel" (click)="cancel()">Cancel</button>
+    <button mat-flat-button color="primary" id="add-user" type="submit" (click)="submit()" [disabled]="form.invalid">Add</button>
+    <button mat-flat-button mat-dialog-close="true" color="warn" class="cancel" id="cancel" (click)="cancel()">Cancel</button>
   </div>
+</div>

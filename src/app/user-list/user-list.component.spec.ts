@@ -46,8 +46,14 @@ describe('UserListComponent', () => {
     // TODO: write unit test that expect user-list table show in app
   });
 
+  it('should render table caption', () => {
+    let instance = fixture.nativeElement as HTMLElement;
+    const caption = instance.querySelector('caption');
+    expect(caption).toBeTruthy()
+  })
+
   it('should re-render user-list table every time user data append', () => {
-    
+
     // TODO: write unit test that expect the count of user-list shown in table equal with data from localStorage
   });
 });

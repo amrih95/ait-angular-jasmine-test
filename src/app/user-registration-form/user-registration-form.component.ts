@@ -8,9 +8,8 @@ import { MatDialogRef } from "@angular/material/dialog";
   styleUrls: ['./user-registration-form.component.scss']
 })
 export class UserRegistrationFormComponent implements OnInit {
-
   form!: FormGroup;
-  
+
   constructor(public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     private formBuilder: FormBuilder,) { }
 
@@ -25,9 +24,9 @@ export class UserRegistrationFormComponent implements OnInit {
   }
 
   submit(): void {
-    // this.isSubmitted = true;
-
     if (!this.form.valid) {
+      return;
+    } else {
       const data = {
         username: this.form.get('userName')?.value,
         name: this.form.get('fullName')?.value,
@@ -39,18 +38,19 @@ export class UserRegistrationFormComponent implements OnInit {
           city: this.form.get('address')?.value
         }
       };
-
       const stored = JSON.parse(localStorage.getItem("users") || '{}');
       stored.push(data);
-
       localStorage.setItem("users", JSON.stringify(stored));
       this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
     }
-
   }
 
   cancel() {
     this.dialogRef.close(JSON.parse(localStorage.getItem("users") || '{}'));
+  }
+
+  get errorControl() {
+    return this.form.controls;
   }
 
 }

@@ -2,11 +2,14 @@
     display: flex;
     flex-direction: column;
     margin: 20px 40px;
-  
+
     .action-register {
       align-self: flex-end;
+      button {
+        margin-right: 16px;
+      }
     }
-  
+
     .action-content-registered {
       display: flex;
       flex-direction: column;
@@ -15,4 +18,3 @@
       margin: 20px 0 !important;
     }
   }
-  
